@@ -13,7 +13,7 @@ namespace ParseEngine
         { "sqrt", "cbrt", "ntrt", "abs", "bitdcr", "bitinc", "floor", "ceil", 
           "exp", "logb", "log10", "log2", "log", "trunc", "sin", "sinh", "asin", 
           "asinh", "cos", "cosh", "acos", "acosh", "tan", "tanh", "atan", "rnd",
-          "atanh", "pow", "max", "min", "maxmg", "minmg" 
+          "atanh", "pow", "max", "min", "maxmg", "minmg", "rand", "randint" 
         };
 
         

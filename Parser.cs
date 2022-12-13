@@ -139,7 +139,7 @@ namespace ParseEngine
             DEBUG_ParserOutput(numbers);
             
             /*
-             * Returns the final result, the single last number in case of a succesful parse.
+             * Returns the final result, the single last number in case of a successful parse.
              */
             return numbers.Pop();                             
         }
@@ -201,6 +201,8 @@ namespace ParseEngine
                 "minmg" => Math.MinMagnitude(numbers.Pop(), numbers.Pop()),
                 "rnd" => Extensions.StackRound(numbers.Pop(), numbers.Pop()),
                 "nrt" => Extensions.NthRoot(numbers.Pop(), numbers.Pop()),
+                "rand" => Extensions.Rand(),
+                "randint" => Extensions.RandInt(numbers.Pop(), numbers.Pop()),
                 _ => 0,
             };
         }

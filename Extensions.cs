@@ -65,5 +65,22 @@ namespace ParseEngine
         /// </summary>
         /// <returns>The number <paramref name="x"/> raised to the power of <paramref name="y"/></returns>
         internal static double StackPow(double y, double x) => Math.Pow(x, y);
+
+
+        /// <summary>
+        /// Returns a random floating-point number that is greater than or equal to 0.0, and less than 1.0.
+        /// </summary>
+        /// <returns>A double-precision floating point number that is greater than or equal to 0.0, and less than 1.0.</returns>
+        internal static double Rand() => Random.Shared.NextDouble();
+
+
+        /// <summary>
+        /// Returns a random integer that is within a specified range.
+        /// </summary>
+        /// <returns>A 32-bit signed integer greater than or equal to <paramref name="min"/> and less than <paramref name="max"/>; that is, the range of return values includes minValue but not maxValue. If minValue equals maxValue, minValue is returned.</returns>
+        /*
+         * The upper and lower bound parameters are provided in reverse order, because of the stack popping numbers in reverse order
+         */
+        internal static double RandInt(double min, double max) => Random.Shared.Next(Convert.ToInt32(max), Convert.ToInt32(min));         
     }
 }
