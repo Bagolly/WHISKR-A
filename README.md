@@ -1,0 +1,2 @@
+# WHISKR-A
+WHISKR Arithmetics
