@@ -1,4 +1,4 @@
 # WHISKR-A
 WHISKR Arithmetics
 
-A KURVA ANYÁDAT
+A KURVA ANYÁDATa
