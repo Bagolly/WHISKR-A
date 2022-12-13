@@ -48,7 +48,7 @@ namespace Parse_2
                 );
 
 
-            string expression = "";
+            string expression = "zsormula(1,2,3,4,5,6)";
             Console.WriteLine(parser.Evaluate(expression));
         }
 
