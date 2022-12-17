@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using ParseEngine;
 
 namespace Parse_2
@@ -30,26 +31,37 @@ namespace Parse_2
                         
                         new Function                                                        //zsiga hídépítő funckiója  -o-_-o-
                         (
-                            name: "zsormula", 
-                            param: new[]{ "x1", "x2", "y1", "y2" , "z1" , "z2" }, 
-                            body: "((z1 ^ 2) + (z2^2)) * (x1 * y1 + x2 * y2)"
-                        )       
+                            name: "sin", 
+                            param: new[]{"a", "b", "c", "d"}, 
+                            body: "a*b*c*d"
+                        ),
+
+                        new Function                                                        //zsiga hídépítő funckiója  -o-_-o-
+                        (
+                            name: "sin",
+                            param: new[]{ "x", "y"  },
+                            body: "x*y"
+                        )
                     },
 
                     new Dictionary<string, double>()
                     {
-                        ["half"] = 0.5,
-                        ["year"] = 2022,
-                        ["first"] = 1,
-                        ["second"] = 2,
-                        ["third"] = 3,
-                        ["a"] = 97
+                        ["π"] = Math.PI,
+                        ["e"] = Math.E,
+                        ["ε"] = double.Epsilon
                     }
                 );
+            
+            List<string> overloads = new()
+            {
+                "sin(0.5)",         //BUILT-IN
+                "sin(3, -2)",       //CUSTOM 1
+                "sin(1,2,3,4)"      //CUSTOM 2
+            };
 
 
-            string expression = "randint(1, 100)";
-            Console.WriteLine(parser.Evaluate(expression));
+            foreach(var expression in overloads)
+                Console.WriteLine(parser.Evaluate(expression));
         }
 
 
