@@ -31,9 +31,8 @@ namespace ParseEngine
              *  current operator, as the correct operation is already known and selected
              *  - see Peek() on every branch.
              */
-            static (double lhs, double rhs) PrepareOperation(Queue<ITokenizable> tokenStream, Stack<double> numbers) 
-            => (numbers.Pop(), numbers.Pop());
-            
+            static (double lhs, double rhs) PrepareOperation(Queue<ITokenizable> tokenStream, Stack<double> numbers) => (numbers.Pop(), numbers.Pop());
+         
 
             /*
              *  Converts the tokens recieved from the tokenizer to postfix notation
@@ -48,7 +47,7 @@ namespace ParseEngine
             while (pTokens.Count > 0)
             {
                 ITokenizable token = pTokens.Dequeue();
-               
+
 
                 if (token.Type is OpType.Number)
                 {
@@ -123,14 +122,39 @@ namespace ParseEngine
                  */
                 else if (token.Type is OpType.FunctionOP)
                 {
-                    if (Evaluator.BuiltInFunctions.Any(x => x == token.Operator))            
+                    
+                    Function function = Evaluator.Functions.FirstOrDefault(x => (x.Name == token.Operator) && (x.Parameters.Length == numbers.Count));
+
+
+                    if (function.Equals(default(Function)))
                     {
                         numbers.Push(RunBuiltinFunction(token, numbers));
                     }
 
-                    else                                                                               
+
+                    /*
+                     *  Handles cases there is a custom function definition with the same name as a built-in function.
+                     *  
+                     *  In the case, that there are multiple custom functions with the same name, but different signatures,
+                     *  the correct function will be selected based on signature, ie. solely the number of parameters defined 
+                     *  (because there are currently no types in the library).
+                     *  
+                     *  The correct definition is selected from the custom definitions with a single LINQ query (see above), and passed by reference to the
+                     *  method handling custom functions.
+                     *  
+                     *  This is a rudementary, but working (for now..), solution to overload-resolution.
+                     */
+                    else
                     {
-                        numbers.Push(RunCustomFunction(token, numbers));
+                        if (numbers.Count == function.Parameters.Length)
+                        {
+                            numbers.Push(RunCustomFunction(numbers, function));
+                        }
+
+                        else
+                        {
+                            numbers.Push(RunBuiltinFunction(token, numbers));
+                        }
                     }
                 }
             }
@@ -231,9 +255,8 @@ namespace ParseEngine
          *  The method pops the correct number of numbers from the numbers stack to fill 
          *  every parameter of the provided function.
          */
-        private double RunCustomFunction(ITokenizable token, Stack<double> numbers)
-        {
-            Function function = Evaluator.Functions.First(x => x.Name == token.Operator);       
+        private double RunCustomFunction(Stack<double> numbers, Function function)
+        {   
             Dictionary<string, double> originalAndFuncParams = Evaluator.Constants;      
                                                                                                   
             for (int i = 0; i < function.Parameters.Length; i++)                                     
