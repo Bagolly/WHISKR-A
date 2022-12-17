@@ -181,6 +181,7 @@ namespace ParseEngine
                         buffer = Convert.ToInt64(buffer, 8).ToString();
                         break;
                     }
+
                 }
                 
                 /*
@@ -237,7 +238,7 @@ namespace ParseEngine
              */
             if (src[i] is '-')
             {
-                if (tStream.Count == 0 || (tStream.Last().Type is BinaryLeft or BinaryRight or ParanthesisOpen))
+                if (tStream.Count == 0 || (tStream.Last().Type is BinaryLeft or BinaryRight or ParanthesisOpen or ArgumentSeparator))
                 {
                     return new Token(src[i].ToString(), UnaryPrefix);
                 }
@@ -313,6 +314,7 @@ namespace ParseEngine
 
             /*
              * One of the provided function names matched the token, return it as a function token.
+             * In this case this is a call to a custom function.
              */
             else                                                                                                            
             {
