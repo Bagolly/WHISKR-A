@@ -81,6 +81,44 @@ namespace ParseEngine
         /*
          * The upper and lower bound parameters are provided in reverse order, because of the stack popping numbers in reverse order
          */
-        internal static double RandInt(double min, double max) => Random.Shared.Next(Convert.ToInt32(max), Convert.ToInt32(min));         
+        internal static double RandInt(double min, double max) => Random.Shared.Next(Convert.ToInt32(max), Convert.ToInt32(min));
+
+        /// <summary>
+        /// Binary operation AND.
+        /// </summary>
+        /// <returns>The result of <paramref name="lhs"/> AND <paramref name="rhs"/>.</returns>
+        internal static double And(double rhs, double lhs) => (long)lhs & (long)rhs;
+
+        /// <summary>
+        /// Binary operation OR.
+        /// </summary>
+        /// <returns>The result of <paramref name="lhs"/> OR <paramref name="rhs"/>.</returns>
+        internal static double Or(double rhs, double lhs) => (long)lhs | (long)rhs;
+
+        /// <summary>
+        /// Binary operation XOR.
+        /// </summary>
+        /// <returns>The result of <paramref name="lhs"/> XOR <paramref name="rhs"/>.</returns>
+        internal static double Xor(double rhs, double lhs) => (long)lhs ^ (long)rhs;
+
+        /// <summary>
+        /// Binary operation NOT.
+        /// </summary>
+        /// <returns>The result of NOT <paramref name="x"/></returns>
+        internal static double Not(double x) => ~(long)x;
+
+        /// <summary>
+        /// Binary operation left shift.
+        /// Discards the high-order bits that are outside the range of <see langword="long"/> and sets the low-order empty bit positions to <see langword="0"></see>.
+        /// </summary>
+        /// <returns>The result of <paramref name="lhs"/> shifted left by <paramref name="rhs"/></returns>
+        internal static double LShift(double rhs, double lhs) => (long)lhs << (int)rhs;
+
+        /// <summary>
+        /// Binary operation right shift.
+        /// Performs an arithmetic shift: the value of the most significant bit (the sign bit) of the left-hand operand is propagated to the high-order empty bit positions. That is, the high-order empty bit positions are set to zero if the left-hand operand is non-negative and set to one if it's negative.
+        /// </summary>
+        /// <returns>The result of <paramref name="lhs"/> shifted right by <paramref name="rhs"/></returns>
+        internal static double RShift(double rhs, double lhs) => (long)lhs >> (int)rhs;
     }
 }
