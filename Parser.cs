@@ -160,7 +160,7 @@ namespace ParseEngine
             }
 
             /*DEBUG TOGGLE*/
-            DEBUG_ParserOutput(numbers);
+            //DEBUG_ParserOutput(numbers);
             
             /*
              * Returns the final result, the single last number in case of a successful parse.
@@ -227,6 +227,12 @@ namespace ParseEngine
                 "nrt" => Extensions.NthRoot(numbers.Pop(), numbers.Pop()),
                 "rand" => Extensions.Rand(),
                 "randint" => Extensions.RandInt(numbers.Pop(), numbers.Pop()),
+                "and" => Extensions.And(numbers.Pop(), numbers.Pop()),
+                "or" => Extensions.Or(numbers.Pop(), numbers.Pop()),
+                "not" => Extensions.Not(numbers.Pop()),
+                "xor" => Extensions.Xor(numbers.Pop(), numbers.Pop()),
+                "lshift" => Extensions.LShift(numbers.Pop(), numbers.Pop()),
+                "rshift" => Extensions.RShift(numbers.Pop(), numbers.Pop()),
                 _ => 0,
             };
         }
@@ -359,11 +365,11 @@ namespace ParseEngine
             while (opStack.Count != 0)
                 outStream.Enqueue(opStack.Pop());
 
-            foreach (var t in outStream)
-                Console.WriteLine(t);
+            //foreach (var t in outStream)
+              //  Console.WriteLine(t);
 
-            Console.WriteLine("POSTFIX PARSING FINISHED. PRESS ANY KEY TO START EVALUATION.");
-            Console.ReadKey();
+            //Console.WriteLine("POSTFIX PARSING FINISHED. PRESS ANY KEY TO START EVALUATION.");
+            //Console.ReadKey();
             return outStream;
         }
         #endregion
