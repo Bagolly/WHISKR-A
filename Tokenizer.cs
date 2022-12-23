@@ -124,14 +124,14 @@ namespace ParseEngine
                  */               
                 if (str[tmpI].IsWhiteSpace() || str[tmpI] == '$')
                 {
-                    ++tmpI;
+                    tmpI++;
                     break;
                 }
 
                 else if (str[tmpI].IsDigit() || str[tmpI] == Convert.ToChar(CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator))
                 {
                     buffer += str[tmpI];
-                    ++tmpI;
+                    tmpI++;
                 }
 
                 /*
