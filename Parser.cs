@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -50,9 +50,7 @@ namespace ParseEngine
 
 
                 if (token.Type is OpType.Number)
-                {
                     numbers.Push(double.Parse(token.Operator));
-                }
             
                 /*
                  *  When a constant token is found, look up the value from the constants
@@ -60,9 +58,7 @@ namespace ParseEngine
                  *  then dequeue the token, as it is completely processed.
                  */
                 else if (token.Type is OpType.Constant)
-                {
                     numbers.Push(Evaluator.Constants.Where(x => x.Key.ToLower() == token.Operator).First().Value);                                                                                          
-                }
 
                 /*
                  *  All binary operators use the same logic
